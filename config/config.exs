@@ -7,6 +7,22 @@
 # General application configuration
 import Config
 
+env_file = Path.expand("../.env", __DIR__)
+
+if File.exists?(env_file) do
+  env_file
+  |> File.read!()
+  |> String.split("\n", trim: true)
+  |> Enum.each(fn line ->
+    unless line == "" or String.starts_with?(line, "#") do
+      case String.split(line, "=", parts: 2) do
+        [key, value] -> System.put_env(String.trim(key), String.trim(value))
+        _ -> :ok
+      end
+    end
+  end)
+end
+
 config :catchup_chat_backend,
   ecto_repos: [CatchupChatBackend.Repo],
   generators: [timestamp_type: :utc_datetime]

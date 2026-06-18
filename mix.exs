@@ -63,6 +63,9 @@ defmodule CatchupChatBackend.MixProject do
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "db.up": ["cmd docker compose up -d"],
+      "db.down": ["cmd docker compose down"],
+      "db.logs": ["cmd docker compose logs -f db"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
     ]

@@ -1,0 +1,17 @@
+# Use this file to reuse an existing Postgres data volume from a
+# manually created container. Copy to docker-compose.override.yml:
+#
+#   cp docker-compose.override.yml.example docker-compose.override.yml
+#
+# Then set EXISTING_VOLUME_NAME to your Docker volume name.
+# Find it with: docker inspect <container_id> --format '{{range .Mounts}}{{.Name}}{{end}}'
+
+services:
+  db:
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data:
+    external: true
+    name: EXISTING_VOLUME_NAME

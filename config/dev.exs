@@ -1,11 +1,11 @@
 import Config
 
-# DB config
+# DB config (values loaded from .env via config/config.exs)
 config :catchup_chat_backend, CatchupChatBackend.Repo,
-  username: "postgres",
-  password: "catchup-pass",
-  hostname: "localhost",
-  database: "catchup_chat_db_postgres",
+  username: System.get_env("POSTGRES_USER") || "postgres",
+  password: System.get_env("POSTGRES_PASSWORD"),
+  hostname: System.get_env("POSTGRES_HOST") || "localhost",
+  database: System.get_env("POSTGRES_DB"),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

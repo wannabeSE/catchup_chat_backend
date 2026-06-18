@@ -6,10 +6,11 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :catchup_chat_backend, CatchupChatBackend.Repo,
-  username: "postgres",
-  password: "catchup-pass",
-  hostname: "localhost",
-  database: "catchup_chat_backend_test#{System.get_env("MIX_TEST_PARTITION")}",
+  username: System.get_env("POSTGRES_USER") || "postgres",
+  password: System.get_env("POSTGRES_PASSWORD"),
+  hostname: System.get_env("POSTGRES_HOST") || "localhost",
+  database:
+    "#{System.get_env("POSTGRES_TEST_DB") || "catchup_chat_backend_test"}#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 

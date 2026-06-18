@@ -25,3 +25,8 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 catchup_chat_backend-*.tar
 
+# Environment variables
+.env
+
+# Local Docker Compose overrides (e.g. reusing an existing data volume)
+docker-compose.override.yml
