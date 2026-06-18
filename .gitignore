@@ -30,3 +30,6 @@ catchup_chat_backend-*.tar
 
 # Local Docker Compose overrides (e.g. reusing an existing data volume)
 docker-compose.override.yml
+
+# Cursor AI files
+.cursor/
