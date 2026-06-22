@@ -13,6 +13,7 @@ defmodule CatchupChatBackend.Application do
       {DNSCluster,
        query: Application.get_env(:catchup_chat_backend, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: CatchupChatBackend.PubSub},
+      CatchupChatBackendWeb.Presence,
       # Start a worker by calling: CatchupChatBackend.Worker.start_link(arg)
       # {CatchupChatBackend.Worker, arg},
       # Start to serve requests, typically the last entry

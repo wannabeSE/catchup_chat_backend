@@ -34,6 +34,15 @@ defmodule CatchupChatBackend.Accounts do
     Repo.one(query)
   end
 
+  def get_user_by_encoded_session_token(encoded_token) when is_binary(encoded_token) do
+    with {:ok, token} <- Base.url_decode64(encoded_token, padding: false),
+         {user, _inserted_at} <- get_user_by_session_token(token) do
+      {:ok, user}
+    else
+      _ -> :error
+    end
+  end
+
   def delete_user_session_token(token) do
     Repo.delete_all(from(UserToken, where: [token: ^token, context: "session"]))
     :ok

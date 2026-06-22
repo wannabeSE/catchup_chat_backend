@@ -10,8 +10,7 @@ defmodule CatchupChatBackendWeb.Plugs.AuthenticateUser do
 
   def call(conn, _opts) do
     with ["Bearer " <> encoded_token] <- get_req_header(conn, "authorization"),
-         {:ok, token} <- Base.url_decode64(encoded_token, padding: false),
-         {user, _inserted_at} <- Accounts.get_user_by_session_token(token) do
+         {:ok, user} <- Accounts.get_user_by_encoded_session_token(encoded_token) do
       assign(conn, :current_user, user)
     else
       _ ->
